@@ -3,42 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
     <link rel="stylesheet" href="./style.css" />
     <title>Exchange Rate</title>
   </head>
   <body>
-    <div class="wrapper">
-      <h1 class="title">Конвертер валют</h1>
-      <div class="form">
-        <p class="sum__text">Введите сумму</p>
-        <input type="text" placeholder="1" />
-      </div>
-      <div class="exchange-wrapper">
-        <section class="drop-list">
-          <div class="from">
+    <div id="wrapper">
+      <h1>Конвертер валют</h1>
+      <form>
+        <section id="amount">
+          <p>Введите сумму</p>
+          <input type="text" value="1" />
+        </section>
+        <section id="drop-lists">
+          <div id="from">
             <p>У меня есть</p>
             <div class="select-box">
-              <img src="" alt="flag" />
+              <img src="https://flagcdn.com/48x36/us.png" alt="flag" />
+              <select></select>
+            </div>
+          </div>
+
+          <div id="icon">
+            <i class="fas fa-exchange-alt" id="change"></i>
+          </div>
+
+          <div id="to">
+            <p>Получу</p>
+            <div class="select-box">
+              <img src="https://flagcdn.com/48x36/ru.png" alt="flag" />
               <select></select>
             </div>
           </div>
         </section>
-        <div class="icon">
-          <img src="" alt="ex" />
-        </div>
-        <div class="to">
-          <p>Получу</p>
-          <div class="select-box">
-            <img src="" alt="flag" />
-            <select></select>
-          </div>
-        </div>
-      </div>
-      <div class="exchange-result">
-        <p class="from-value">1 USD =</p>
-        <p class="from-value">81.60 RUB</p>
-      </div>
-      <button class="show-result">Узнать обменный курс</button>
+
+        <div id="exchange-rate">Здесь выведется результат</div>
+        <button>Узнать обменный курс</button>
+      </form>
     </div>
     <script src="./js/script.js"></script>
   </body>
