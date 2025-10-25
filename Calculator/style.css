@@ -1,0 +1,192 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.calculator {
+  background: #1a1a1a;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  width: 100%;
+  max-width: 350px;
+  border: 1px solid #333;
+}
+
+.display {
+  background: #000;
+  color: white;
+  font-size: 3rem;
+  font-weight: 300;
+  text-align: right;
+  padding: 30px 20px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom: 1px solid #333;
+  word-break: break-all;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 80px;
+  gap: 1px;
+  background: #333;
+}
+
+.main-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.operations {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #333;
+}
+
+.operations button {
+  background: #a6a6a6;
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border: none;
+  height: 70px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.operations button:hover {
+  background: #b8b8b8;
+}
+
+.operations button:active {
+  background: #999;
+}
+
+.digits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #333;
+}
+
+.digits button {
+  background: #4d4d4d;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 400;
+  border: none;
+  height: 80px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.digits button:hover {
+  background: #5a5a5a;
+}
+
+.digits button:active {
+  background: #404040;
+}
+
+#zero {
+  grid-column: span 2;
+}
+
+.operations-right {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 1px;
+}
+
+.operations-right button {
+  background: #ff9500;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 80px;
+}
+
+.operations-right button:hover {
+  background: #ffaa33;
+}
+
+.operations-right button:active {
+  background: #e08500;
+}
+
+.operations-right button:first-child {
+  background: #ff3b30;
+  font-size: 1.1rem;
+}
+
+.operations-right button:first-child:hover {
+  background: #ff5c52;
+}
+
+.operations-right button:last-child {
+  background: #ff9500;
+  grid-row: span 2;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 480px) {
+  .calculator {
+    max-width: 100%;
+    border-radius: 15px;
+  }
+
+  .display {
+    font-size: 2.5rem;
+    padding: 25px 15px;
+    min-height: 100px;
+  }
+
+  .digits button,
+  .operations-right button {
+    height: 70px;
+    font-size: 1.3rem;
+  }
+
+  .operations button {
+    height: 60px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .calculator {
+    background: #000;
+    border-color: #444;
+  }
+
+  .display {
+    background: #000;
+    border-color: #444;
+  }
+}
