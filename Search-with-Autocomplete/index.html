@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Поисковик с автокомплитом</title>
+  </head>
+  <body>
+    <div class="search-container">
+      <!-- Поисковая строка -->
+      <div class="search-box">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Введите поисковый запрос..."
+          autocomplete="off"
+        />
+        <button id="search-button">Найти</button>
+      </div>
+
+      <!-- Контейнер для подсказок автокомплита -->
+      <div class="autocomplete-suggestions" id="suggestions-container"></div>
+
+      <!-- История поиска -->
+      <div class="search-history" id="search-history">
+        <div class="history-title">История поиска:</div>
+        <div class="history-items" id="history-items"></div>
+      </div>
+
+      <div class="search-results" id="results-container">
+        <div class="results-header">
+          <div class="results-count" id="results-count">
+            Найдено результатов: 0
+          </div>
+        </div>
+
+        <div class="results-list" id="results-list"></div>
+
+        <div class="loading" id="loading-indicator" style="display: none">
+          Поиск...
+        </div>
+
+        <div class="no-results" id="no-results" style="display: none">
+          По вашему запросу ничего не найдено!
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
