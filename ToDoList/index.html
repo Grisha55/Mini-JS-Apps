@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>ToDoList</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <div class="nav">
+          <div class="nav__date-block">
+            <div class="nav__date">
+              <h1 class="nav__day">Сегодня</h1>
+              <p class="nav__number-of-tasks" id="nav__number-of-tasks">
+                7 задач
+              </p>
+            </div>
+            <h1 class="nav__title">Задачи:</h1>
+          </div>
+          <button class="nav__settings">
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <main>
+      <div class="container">
+        <div id="tasks-container" class="tasks-container"></div>
+        <button class="add-task" id="add-task">
+          <i class="fa-solid fa-plus"></i>
+          <p>Добавить задачу</p>
+        </button>
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

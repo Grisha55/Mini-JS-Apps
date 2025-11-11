@@ -1,0 +1,179 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fff;
+  font-size: 1.6rem;
+}
+
+/* header */
+
+.header {
+  margin-top: 2rem;
+}
+
+.container {
+  width: 100%;
+  max-width: 120rem;
+  padding: 0 4rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.nav__date-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.nav__date {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav__title {
+  font-family: sans-serif;
+  font-size: 1.8rem;
+}
+
+.nav__day {
+  font-family: sans-serif;
+  font-size: 2rem;
+}
+
+.nav__number-of-tasks {
+  font-family: sans-serif;
+  font-size: 1.4rem;
+}
+
+.nav__settings {
+  background-color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.nav__settings i {
+  background: transparent;
+}
+
+.nav__settings:hover {
+  transform: scale(1.5);
+  color: crimson;
+}
+
+/* main */
+
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0 1rem 0;
+  gap: 1rem;
+}
+
+.task {
+  transition: all 0.2s ease;
+  cursor: grab;
+  user-select: none;
+  position: relative;
+}
+
+.task.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+  transform: rotate(3deg);
+  z-index: 1000;
+}
+
+.task.drag-over {
+  border-top: 2px solid #007bff;
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+}
+
+.task:active {
+  cursor: grabbing;
+}
+
+/* Индикатор места вставки */
+.task.drag-over::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #007bff;
+  animation: pulse 0.5s infinite alternate;
+}
+
+.task-block {
+  padding: 2rem 1.5rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.checkbox {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.checkbox:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.task-title {
+  font-family: sans-serif;
+  font-size: 1.6rem;
+  font-weight: normal;
+}
+
+.add-task {
+  padding: 1rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  width: 100%;
+  max-width: 20rem;
+  background-color: #fff;
+  border: 1px solid lightgray;
+  border-radius: 1rem
+}
+
+.add-task:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.add-task i {
+  color: red;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.5;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
