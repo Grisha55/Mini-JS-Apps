@@ -1,0 +1,426 @@
+@use 'constants' as *;
+@use 'functions' as *;
+@use 'mixins' as *;
+
+/* Общие стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 fluid(32, 16);
+}
+
+/* Хедер */
+.header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav {
+  @include flex-center;
+  justify-content: space-between;
+  padding: fluid(24, 16) 0;
+
+  @include mobile {
+    flex-direction: column;
+    gap: fluid(16, 12);
+    align-items: flex-start;
+  }
+}
+
+.nav__date-block {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(8, 4);
+}
+
+.nav__day {
+  @include fluid-text(32, 24);
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0;
+}
+
+.nav__number-of-tasks {
+  @include fluid-text(16, 14);
+  color: #718096;
+  font-weight: 500;
+}
+
+.nav__title {
+  @include fluid-text(24, 18);
+  font-weight: 600;
+  color: #4a5568;
+  margin-top: fluid(10, 8);
+}
+
+.nav__settings {
+  background: none;
+  border: none;
+  @include fluid-text(20, 16);
+  color: #718096;
+  cursor: pointer;
+  padding: fluid(8, 6);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+
+  @include hover {
+    background: #f7fafc;
+    color: #4a5568;
+    transform: rotate(90deg);
+  }
+}
+
+/* Основной контент */
+main {
+  padding: fluid(40, 24) 0;
+}
+
+/* Форма добавления задачи */
+.add-task-form {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: fluid(25, 16);
+  border-radius: fluid(16, 12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: fluid(30, 20);
+  @include flex-center;
+  gap: fluid(15, 10);
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+#task-input {
+  flex: 1;
+  padding: fluid(15, 12) fluid(20, 16);
+  border: 2px solid #e2e8f0;
+  border-radius: fluid(12, 8);
+  @include fluid-text(16, 14);
+  background: white;
+  transition: all 0.3s ease;
+  outline: none;
+  width: 100%;
+
+  &:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+  }
+
+  &::placeholder {
+    color: #a0aec0;
+  }
+}
+
+#add-task-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: fluid(15, 12) fluid(25, 16);
+  border-radius: fluid(12, 8);
+  @include fluid-text(16, 14);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+
+  @include hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(10, 8);
+  margin-bottom: fluid(30, 20);
+  min-height: 200px;
+}
+
+/* Стили для задач */
+.task {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: fluid(16, 12);
+  padding: fluid(20, 16);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  animation: slideIn 0.3s ease;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &.dragging {
+    opacity: 0.6;
+    transform: rotate(5deg);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  &.drag-over {
+    border: 2px dashed #667eea;
+    background: rgba(102, 126, 234, 0.1);
+    transform: scale(1.02);
+  }
+
+  &.fade-out {
+    animation: fadeOut 0.3s ease forwards;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+}
+
+.task-content {
+  @include flex-center;
+  gap: fluid(15, 10);
+
+  @include mobile {
+    flex-wrap: wrap;
+  }
+}
+
+.task-checkbox {
+  @include square(20px);
+  border: 2px solid #cbd5e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+
+  &:checked {
+    background: #48bb78;
+    border-color: #48bb78;
+
+    &::after {
+      content: '✓';
+      color: white;
+      @include abs-center;
+      @include fluid-text(12, 10);
+      font-weight: bold;
+    }
+  }
+}
+
+.task-text {
+  flex: 1;
+  @include fluid-text(18, 14);
+  color: #2d3748;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 5px 0;
+
+  .task-checkbox:checked + & {
+    text-decoration: line-through;
+    color: #a0aec0;
+  }
+}
+
+.edit-btn,
+.delete-btn {
+  background: none;
+  border: none;
+  padding: fluid(8, 6);
+  border-radius: fluid(8, 6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  @include fluid-text(16, 14);
+
+  @include hover {
+    transform: scale(1.1);
+  }
+}
+
+.edit-btn {
+  color: #4299e1;
+
+  @include hover {
+    background: #ebf8ff;
+  }
+}
+
+.delete-btn {
+  color: #f56565;
+
+  @include hover {
+    background: #fed7d7;
+  }
+}
+
+.edit-form {
+  @include flex-center;
+  gap: fluid(10, 8);
+  margin-top: fluid(15, 12);
+  animation: slideDown 0.3s ease;
+
+  @include mobile {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.edit-input {
+  flex: 1;
+  padding: fluid(12, 10) fluid(16, 12);
+  border: 2px solid #e2e8f0;
+  border-radius: fluid(8, 6);
+  @include fluid-text(16, 14);
+  background: white;
+  transition: all 0.3s ease;
+  outline: none;
+  width: 100%;
+
+  &:focus {
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+  }
+}
+
+.save-btn,
+.cancel-btn {
+  padding: fluid(10, 8) fluid(15, 12);
+  border: none;
+  border-radius: fluid(8, 6);
+  @include fluid-text(14, 12);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  @include hover {
+    transform: translateY(-1px);
+  }
+}
+
+.save-btn {
+  background: #48bb78;
+  color: white;
+
+  @include hover {
+    background: #38a169;
+  }
+}
+
+.cancel-btn {
+  background: #a0aec0;
+  color: white;
+
+  @include hover {
+    background: #718096;
+  }
+}
+
+.add-task {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px dashed #cbd5e0;
+  border-radius: fluid(16, 12);
+  padding: fluid(20, 16);
+  width: 100%;
+  @include flex-center;
+  gap: fluid(12, 8);
+  color: #718096;
+  @include fluid-text(16, 14);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  @include hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: #667eea;
+    color: #667eea;
+    transform: translateY(-2px);
+  }
+
+  i {
+    @include fluid-text(20, 16);
+  }
+}
+
+/* Скроллбар */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Вспомогательные классы */
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.focus-visible {
+  @include focus-visible;
+}
+
+.disabled {
+  @include disabled;
+}
